@@ -26,6 +26,8 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> Create([FromBody] AddWalkRequestDto body) {
             // Convert to Domain Model
 
+            if (ModelState.IsValid != true) return BadRequest();
+            
             var theWalk = await walksRepository.CreateAsync(mapper.Map<Walk>(body));
             // Convert back to DTO
 
